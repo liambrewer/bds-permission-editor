@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import SelectFile from './components/SelectFile';
 import jsonfile from 'jsonfile';
 import { UserPermissions } from './types/bds.types';
@@ -8,6 +8,20 @@ import Editor from './components/Editor';
 function App() {
   const [json, setJson] = useState<UserPermissions[] | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (json) {
+      json.sort((a, b) => {
+        if (a.permission < b.permission) {
+          return 1;
+        } else if (a.permission === b.permission) {
+          return 0;
+        } else {
+          return -1;
+        }
+      });
+    }
+  }, [json]);
 
   const handleFileChange = (file: File) => {
     setLoading(true);

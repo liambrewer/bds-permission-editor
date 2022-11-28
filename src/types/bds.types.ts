@@ -1,7 +1,7 @@
 export enum PermissionLevel {
-  VISITOR = 'visitor',
-  MEMBER = 'member',
   OPERATOR = 'operator',
+  MEMBER = 'member',
+  VISITOR = 'visitor',
 }
 
 export type XUID = string;
